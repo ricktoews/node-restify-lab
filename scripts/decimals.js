@@ -20,6 +20,11 @@ function divide(denom, num) {
 }
 
 
+/*
+ * Determine repeating and non-repeating numbers of digits.
+ * First, get non-repeating by dividing out all factors of base.
+ * Then, determine repeating, by subtracting non-repeating from period length.
+ */
 function getStats(denom, num, period) {
   var count = [];
   baseFactors.forEach((f, ndx) => {
@@ -55,8 +60,13 @@ function getPeriod(denom, num) {
     lastRemainder = num;
   }
 
-  var period = digits.join('');
-  var stats = getStats(denom, startNum, period);
+  return digits.join('');
+}
+
+
+function getDecimal(denom, num) {
+  var period = getPeriod(denom, num);
+  var stats = getStats(denom, num, period);
   var result = {
     period, stats
   };
@@ -64,4 +74,4 @@ function getPeriod(denom, num) {
 }
 
 
-module.exports = { divide, getStats, getPeriod };
+module.exports = { divide, getPeriod, getStats, getDecimal };
