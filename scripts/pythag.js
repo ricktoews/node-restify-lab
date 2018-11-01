@@ -66,5 +66,16 @@ function getTriples() {
   return triples;
 }
 
-var result = getTriples();
-console.log(result);
+
+function pythag(corner) {
+  let corner_triples;
+  if (corner === 2) {
+    corner_triples = getTripleEven();
+  } else {
+    corner_triples = getTripleOdd(corner);
+  }
+  return corner_triples;
+}
+
+module.exports = pythag;
+
