@@ -21,6 +21,24 @@ function divide(denom, num) {
 
 
 /*
+ * Determine whether the period is complementary or not. How, you ask?
+ * * Get the repeating part of the period. If it's an odd length, it's no complementary.
+ * * Otherwise, split it in two, and add the two parts. If the sum is all 9s, it's complementary.
+ */
+function isComplementary(period, nonRepeting, repeating) {
+  var result = false;
+  var r = period.substr(period.length - repeating);
+  if (r.length % 2 === 0) {
+    let partA = 1*r.substr(0, r.length / 2);
+	let partB = 1*r.substr(r.length / 2);
+    let sum = partA + partB;
+	// The idea is to test the sum to see if it's all 9s.
+	result = sum.toString().replace(/9/g, '').length === 0;
+  }
+  return result;
+}
+
+/*
  * Determine repeating and non-repeating numbers of digits.
  * First, get non-repeating by dividing out all factors of base.
  * Then, determine repeating, by subtracting non-repeating from period length.
@@ -37,7 +55,8 @@ function getStats(denom, num, period) {
   });
   var nonRepeating = Math.max(...count);
   var repeating = period.length - nonRepeating;
-  var stats = { nonRepeating, repeating };
+  var complementary = isComplementary(period, nonRepeating, repeating);
+  var stats = { nonRepeating, repeating, complementary };
   return stats;
 }
 
@@ -47,17 +66,21 @@ function getStats(denom, num, period) {
  */
 function getPeriod(denom, num) {
   var max = 1000;
+  var remainders = []; // to keep track of remainders, to detect a repeat.
   var digits = []; // for collection the digits in the period.
-  var lastRemainder = -1;
   var startNum = num;
   var done = false;
 
   while (!done) {
+    remainders.push(num);
     var { quotient: digit, remainder: num, shifts } = divide(denom, num);
-    for (; shifts > 1; shifts--) digits.push(0); // 
+    for (; shifts > 1; shifts--) digits.push(0); // insert 0s as needed.
     digits.push(digit);
-    done = num === startNum || num === 0 || num === lastRemainder || digits.length > max;
-    lastRemainder = num;
+	if (remainders.indexOf(num) !== -1 ||
+	    num === 0 ||
+		digits.length > max) {
+	  done = true;
+	}
   }
 
   return digits.join('');

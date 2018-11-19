@@ -1,4 +1,4 @@
-const CORNERS = 10;
+const CORNERS = 5;
 const SIZE_OF_LIST = 5;
 
 const numSort = (a, b) => a-b;
@@ -12,11 +12,10 @@ function getCorners() {
 
 
 function* getSquares(start) {
-  var n = Math.sqrt(start) + 2;
-  var sq;
+  var n = Math.sqrt(start);
   while (true) {
-    yield(n*n);
     n += 2;
+    yield(n*n);
   }
 }
 
@@ -38,7 +37,7 @@ function getTripleOdd(corner) {
   var squareGen = getSquares(corner);
   var triples = [];
   for (let i = 0; i < SIZE_OF_LIST; i++) {
-    let nextSquare = (() => { let gen = squareGen.next(); return gen.value; })();
+    let nextSquare = (() => squareGen.next().value)();
     let a = (nextSquare - corner) / 2; // n(n + 2a); solving for a in the (n + 2a) part.
     let b = Math.sqrt(corner * corner + 2 * corner * a);
     let c = Math.sqrt(a*a + b*b);
