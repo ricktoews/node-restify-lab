@@ -2,6 +2,7 @@
  * Handlers for REST calls
  */
 var getDecimal = require('./scripts/decimals').getDecimal;
+var pythag = require('./scripts/pythag');
 
 var handlers = {};
 
@@ -31,6 +32,14 @@ handlers.getDecimal = (req, res, next) => {
   }
   res.header('content-type', 'json');
   res.send(rows);
+  next();
+};
+
+handlers.getPythag = (req, res, next) => {
+  var corner = req.params.corner;
+  var data = pythag(corner);
+  res.header('content-type', 'json');
+  res.send(data);
   next();
 };
 

@@ -11,6 +11,8 @@ function getCorners() {
 }
 
 
+// Assumed that start is odd.
+// Yields the square of the current odd number.
 function* getSquares(start) {
   var n = Math.sqrt(start) + 2;
   var sq;
@@ -22,6 +24,7 @@ function* getSquares(start) {
 
 
 function getTripleEven() {
+  // aValues is a list of n^2 - 1, where for even values n.
   var aValues = [...Array(SIZE_OF_LIST)].map((n, i) => Math.pow((i+1)*2, 2) - 1);
   var triples = [];
   aValues.forEach(a => {
@@ -54,25 +57,8 @@ function getTripleOdd(corner) {
 }
 
 
-function getTriples() {
-  var corners = getCorners();
-  var triples = [];
-  corners.forEach(corner => {
-    let corner_triples;
-    if (corner === 2) {
-      corner_triples = getTripleEven();
-    } else {
-      corner_triples = getTripleOdd(corner);
-    }
-
-    triples.push(corner_triples);
-  });
-
-  return triples;
-}
-
-
 function pythag(corner) {
+  corner = 1*corner;
   let corner_triples;
   if (corner === 2) {
     corner_triples = getTripleEven();

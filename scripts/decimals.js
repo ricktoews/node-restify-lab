@@ -1,5 +1,3 @@
-const periods = ['142857', '285714', '428571', '571428', '714285', '857142'];
-
 const BASE = 10;
 var baseFactors = [2, 5];
 /*
@@ -22,8 +20,15 @@ function divide(denom, num) {
 
 /*
  * Determine whether the period is complementary or not. How, you ask?
- * * Get the repeating part of the period. If it's an odd length, it's no complementary.
+ * * Get the repeating part of the period. If it's an odd length, it's not complementary.
  * * Otherwise, split it in two, and add the two parts. If the sum is all 9s, it's complementary.
+ * * UPDATE: Have proof that an even length period is complementary, so it's not necessary
+ *           to check the sum of the two halves. I'm sure you're dying to know how we know this.
+ *           More to the point, I'm dying to tell you. You'll find an explanation below.
+ * * UPDATED UPDATE: The above is correct; however, it really only applies to prime numbers. Since
+ *           we'll be checking periods of composite numbers, we might as well revert to the 
+ *           original test.
+ *
  */
 function isComplementary(period, nonRepeting, repeating) {
   var result = false;
@@ -35,6 +40,7 @@ function isComplementary(period, nonRepeting, repeating) {
 	// The idea is to test the sum to see if it's all 9s.
 	result = sum.toString().replace(/9/g, '').length === 0;
   }
+
   return result;
 }
 
@@ -98,3 +104,19 @@ function getDecimal(denom, num) {
 
 
 module.exports = { divide, getPeriod, getStats, getDecimal };
+
+/*
+
+How do we know that an even length period is complementary, you ask? Allow me to explain...
+
+First, I should highlight an idea or two. The process of expanding the decimal begins with attempting to divide the denominator into the numerator and continues until one reaches a remainder that's equal to the initial numerator. At this point, further processing will yield the same sequence of digits one has already calculated. I find it useful to think of the numerator as simply the initial remainder.
+
+Remainder complement: The remainder complement of a value is the denominator minus that value.
+
+The period length is the minimum 10^x - 1 the prime denominator divides. Since the period has an even number of digits, x is even: so let's express it as 2n.
+10^2n - 1 can be factored as (10^n + 1)(10^n - 1). Since 10^2n - 1 is the minimum 10^x - 1 the denominator divides, it cannot divide 10^n - 1. Therefore, it divides 10^n + 1.
+
+Since the denominator divides 10^n + 1, it divides 10^n - (denominator - 1). This means that, with a numerator, or initial remainder, of 1, the process will encounter a remainder of (denominator - 1), and the second half of the expansion will complement the first half.
+
+
+ */
