@@ -14,9 +14,16 @@ function phiPower(n) {
 	power.whole = whole / 2;
 	power.coef = coef / 2;
   }
+  power.exponent = 1*n;
   power.real = Math.pow(phi, n);
   power.sqrt5 = power.coef * Math.sqrt(5);
 
+  return power;
+}
+
+function getPhiPower(n) {
+  var power = [];
+  power.push(phiPower(n));
   return power;
 }
 
@@ -28,4 +35,4 @@ function getPhiPowers(n) {
   return powers;
 }
 
-module.exports = { getPhiPowers };
+module.exports = { getPhiPowers, getPhiPower };
