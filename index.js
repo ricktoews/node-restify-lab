@@ -14,8 +14,8 @@ server.get('/decimal/:denom/:num', handlers.getDecimal);
 
 server.get('/pythag/:corner', handlers.getPythag);
 
+server.get('/phi/:power', handlers.getPhiPowers);
+
 server.listen(8080, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
-
-

@@ -3,6 +3,7 @@
  */
 var getDecimal = require('./scripts/decimals').getDecimal;
 var pythag = require('./scripts/pythag');
+var getPhiPowers = require('./scripts/phi').getPhiPowers;
 
 var handlers = {};
 
@@ -38,6 +39,14 @@ handlers.getDecimal = (req, res, next) => {
 handlers.getPythag = (req, res, next) => {
   var corner = req.params.corner;
   var data = pythag(corner);
+  res.header('content-type', 'json');
+  res.send(data);
+  next();
+};
+
+handlers.getPhiPowers = (req, res, next) => {
+  var power = req.params.power;
+  var data = getPhiPowers(power);
   res.header('content-type', 'json');
   res.send(data);
   next();
