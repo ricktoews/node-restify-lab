@@ -9,8 +9,7 @@ server.get('/hello/:name', (req, res, next) => {
 });
 
 
-server.get('/decimal/:denom', handlers.getDecimal);
-server.get('/decimal/:denom/:num', handlers.getDecimal);
+server.get('/dc/:denom', handlers.getDc);
 
 server.get('/pythag/:corner', handlers.getPythag);
 
