@@ -1,0 +1,68 @@
+h1 {
+  font: 2em sans-serif;
+  text-align: center;
+}
+
+.initial-wrapper, .problem-wrapper {
+  text-align: center;
+}
+
+.initial {
+  display: inline-block;
+  height: 40px;
+  border: 1px solid green;
+}
+
+.problem {
+  display: inline-block;
+  height: 300px;
+  border: 1px solid red;
+}
+
+.button-wrapper {
+  text-align: center;
+}
+
+.group {
+  display: inline-block;
+}
+
+.groupbg {
+  animation: bgchange 10s;
+}
+.groupbg-alt {
+  animation: bgchange-alt 10s;
+}
+
+@keyframes bgchange {
+  0%: { background-color: #ccc; }
+  100%: { background-color: #ccc; }
+}
+@keyframes bgchange-alt {
+  0%: { background-color: #ccc; }
+  25%: { background-color: #bbb; }
+  50%: { background-color: #aaa; }
+  75%: { background-color: #999; }
+  100%: { background-color: #999; }
+}
+
+
+.horse {
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  font: .75em sans-serif;
+  line-height: 22px;
+  width: 24px;
+  height: 24px;
+  margin: 5px;
+  border-radius: 12px;
+}
+
+.horsebg {
+  background-color: #ccc;
+}
+
+.horsebg-alt {
+  background-color: #999;
+}
