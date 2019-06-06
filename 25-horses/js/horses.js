@@ -22,22 +22,14 @@ function layout() {
   initialEl.classList.add('initial');
   initialWrapper.appendChild(initialEl);
 
-  problemWrapper = document.createElement('div');
-  problemWrapper.classList.add('problem-wrapper');
-
-  problemEl = document.createElement('div');
-  problemEl.classList.add('problem');
-  problemWrapper.appendChild(problemEl);
 
   root.appendChild(titleEl);
   root.appendChild(stepBtnWrapper);
   root.appendChild(initialWrapper);
-  root.appendChild(problemWrapper);
 
   els = {
     title: titleEl,
     initial: initialEl,
-    problem: problemEl,
     stepBtn: stepBtn
   };
 }
@@ -76,6 +68,7 @@ function initialContent() {
   });
 }
 
+
 function arrangeInSquare() {
   var rows = [[]];
   els.horseEls.forEach((el, ndx) => {
@@ -87,6 +80,54 @@ function arrangeInSquare() {
     let row = Math.floor(ndx / 5);
     rows[row].push(el.dataset.entry);
   });
+}
+
+
+function moveEl(el, newCoord) {
+}
+
+function initMoveEl(el, from, to) {
+  var moveHandler = setTimer(move(el, newCoords), 20);
+}
+
+function moveToGrid() {
+  var coords = [];
+  els.groups.forEach((el, ndx) => {
+    var groupEl = el;
+    var elWidth = groupEl.offsetWdith;
+    var xCoord = groupEl.offsetLeft;
+    var yCoord = groupEl.offsetTop;
+    coords.push({ xCoord, yCoord });
+  });
+  els.groups.forEach((el, ndx) => {
+    var groupEl = el;
+    /*
+    var xCoord = (window.innerWidth - groupEl.offsetWidth) / 2;
+    var yCoord = groupEl.offsetTop + 20 + (ndx+1) * groupEl.offsetHeight;
+    */
+    var xCoord = coords[ndx].xCoord;
+    var yCoord = coords[ndx].yCoord;
+    groupEl.style.position = 'absolute';
+    groupEl.style.display = 'block';
+    groupEl.style.top = yCoord + 'px';
+    groupEl.style.left = xCoord + 'px';
+  });
+
+  var ndx = 0;
+  var groupEl = els.groups[ndx];
+  var xCoord = (window.innerWidth - groupEl.offsetWidth) / 2;
+  var yCoord = groupEl.offsetTop + 20 + (ndx+1) * groupEl.offsetHeight;
+  groupEl.style.top = yCoord + 'px';
+  groupEl.style.left = xCoord + 'px';
+  /*
+  els.groups.forEach((el, ndx) => {
+    var groupEl = el;
+    var xCoord = (window.innerWidth - groupEl.offsetWidth) / 2;
+    var yCoord = groupEl.offsetTop + 20 + (ndx+1) * groupEl.offsetHeight;
+    groupEl.style.top = yCoord + 'px';
+    groupEl.style.left = xCoord + 'px';
+  });
+  */
 }
 
 function groupHorses() {
@@ -111,6 +152,7 @@ function groupHorses() {
     }
   });
   
+  nextStep = moveToGrid;
 }
 
 nextStep = groupHorses;

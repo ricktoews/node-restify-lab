@@ -3,7 +3,7 @@ h1 {
   text-align: center;
 }
 
-.initial-wrapper, .problem-wrapper {
+.initial-wrapper {
   text-align: center;
 }
 
@@ -11,12 +11,6 @@ h1 {
   display: inline-block;
   height: 40px;
   border: 1px solid green;
-}
-
-.problem {
-  display: inline-block;
-  height: 300px;
-  border: 1px solid red;
 }
 
 .button-wrapper {
@@ -27,23 +21,22 @@ h1 {
   display: inline-block;
 }
 
-.groupbg {
-  animation: bgchange 10s;
+.group .horsebg {
+  animation-name: bgchange;
+  animation-duration: 150ms;
 }
-.groupbg-alt {
-  animation: bgchange-alt 10s;
+.group .horsebg-alt {
+  animation-name: bgchange-alt;
+  animation-duration: 150ms;
 }
 
 @keyframes bgchange {
-  0%: { background-color: #ccc; }
-  100%: { background-color: #ccc; }
+  from { background-color: #ccc; }
+  to { background-color: #ccc; }
 }
 @keyframes bgchange-alt {
-  0%: { background-color: #ccc; }
-  25%: { background-color: #bbb; }
-  50%: { background-color: #aaa; }
-  75%: { background-color: #999; }
-  100%: { background-color: #999; }
+  from { background-color: #ccc; }
+  to { background-color: #999; }
 }
 
 
