@@ -10,7 +10,6 @@ h1 {
 .initial {
   display: inline-block;
   height: 40px;
-  border: 1px solid green;
 }
 
 .button-wrapper {
@@ -29,6 +28,10 @@ h1 {
   animation-name: bgchange-alt;
   animation-duration: 150ms;
 }
+.group .racedbg {
+  animation-name: racedchange;
+  animation-duration:500mx;
+}
 
 @keyframes bgchange {
   from { background-color: #ccc; }
@@ -37,6 +40,10 @@ h1 {
 @keyframes bgchange-alt {
   from { background-color: #ccc; }
   to { background-color: #999; }
+}
+@keyframes racedchange {
+  from { background-color: #ccc; }
+  to { background-color: green; }
 }
 
 
@@ -58,4 +65,17 @@ h1 {
 
 .horsebg-alt {
   background-color: #999;
+}
+
+.racedbg {
+  background-color: green;
+}
+.racedbg:nth-child(5) {
+  background-color:#f90;
+}
+.final {
+  background-color: purple;
+}
+.first-place {
+  background-color: gold;
 }
