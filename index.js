@@ -25,6 +25,6 @@ server.get('/pythag/:corner', handlers.getPythag);
 server.get('/phi/:power', handlers.getPhiPower);
 server.get('/phiseries/:power', handlers.getPhiPowers);
 
-server.listen(8081, function() {
+server.listen(3000, function() {
   console.log('%s listening at %s', server.name, server.url);
 });

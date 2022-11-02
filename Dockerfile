@@ -1,14 +1,14 @@
 FROM node:17.5
 
-RUN groupadd -r rick && useradd -g rick rick
+RUN groupadd -r math && useradd -g math math
 
-RUN mkdir -p /rick/app
-RUN cd /rick/app
-WORKDIR /rick/app
+RUN mkdir -p /math/app
+RUN cd /math/app
+WORKDIR /math/app
 COPY . .
 
-RUN chown -R rick:rick /rick/app
+RUN chown -R math:math /math/app
 
-USER rick
-CMD ["node", "index.js"]
+USER math
+CMD ["npm", "start"]
 EXPOSE 3000
